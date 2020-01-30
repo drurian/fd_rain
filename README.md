@@ -28,25 +28,17 @@ common packages pre-configured for rapid site development and optional content f
 
 ## Setting up a local [Vagrant](http://vagrantup.com) environment
 
+### Clone this repository into the directory of your choice:
+- `$ git clone git@github.com:drurian/fd_rain.git`
+
+### Rename & configure sample 'mis_profile' install profile
+- Change this to the name of your project name
+- Find and replace all instances of 'mis_profile' with your project name
+- Enable desired base profile features and modules (see mis_profile.install for more instructions).
+
 ### Install composer on host machine
 - On MacOS ```brew install composer```
 - Otherwise, see instructions here https://getcomposer.org/
-
-### Clone this project and Initialize Project:
-- `$ git clone git@bitbucket.org:mediacurrent/drupal-project.git`
-- `$ cd drupal-project`
-- `$ composer install`
-- `$ composer drupal-scaffold`
-- `$ ./scripts/hobson project:init example.mcdev 192.168.50.4`
-- `$ ./scripts/hobson project:create-drush-alias`
-*	This runs composer install.  As this is the first time being run, it is a composer update and calculates all dependencies.
-* This command ensures the config/config.yml is in place and has the domain and IP set. Edit config/config.yml to enable any additional features.
-- Before the first time you run the build script, proceed to the next section: "Rename & configure sample 'mis_profile' install profile".
-
-### Rename & configure sample 'mis_profile' install profile
-- Rename the mis_profile directory to the name of your project
-- Find and replace all instances of 'mis_profile' with your project name
-- Enable desired base profile features and modules (see mis_profile.install for more instructions).
 
 ### Run the build script.
 - `$ ./scripts/build.sh`
@@ -59,11 +51,6 @@ This script automates the following steps:
 * Installs the project Drupal site
 
 The initial pass of the build script downloads several dependencies and an intermittent internet connection will affect the initial build process.
-
-### Compile the theme (required).
-Note that the theme will not render correctly without running npm.
-
-Follow the [rain_theme project README](https://bitbucket.org/mediacurrent/rain_theme/src/master/README.md) for build instructions.
 
 ### Troubleshooting
 * Ensure Vagrant has provisioned without errors. Correct errors before proceeding. After vagrant provision is successful it maybe be helpful to vagrant halt && vagrant up`
@@ -96,58 +83,8 @@ Follow the [rain_theme project README](https://bitbucket.org/mediacurrent/rain_t
 ## Demo Content
 * TBD
 
-The [drupal-scaffold](https://github.com/drupal-composer/drupal-scaffold) plugin can download the scaffold files (like
-index.php, update.php, …) to the web/ directory of your project. If you have not customized those files you could choose
-to not check them into your version control system (e.g. git). If that is the case for your project it might be
-convenient to automatically run the drupal-scaffold plugin after every install or update of your project. You can
-achieve that by registering `@composer drupal:scaffold` as post-install and post-update command in your composer.json:
-
-```json
-"scripts": {
-    "post-install-cmd": [
-        "@composer drupal:scaffold",
-        "..."
-    ],
-    "post-update-cmd": [
-        "@composer drupal:scaffold",
-        "..."
-    ]
-},
-```
-### How can I apply patches to downloaded modules?
-
-If you need to apply patches (depending on the project being modified, a pull 
-request is often a better solution), you can do so with the 
-[composer-patches](https://github.com/cweagans/composer-patches) plugin.
-
-To add a patch to drupal module foobar insert the patches section in the extra 
-section of composer.json:
-```json
-"extra": {
-    "patches": {
-        "drupal/foobar": {
-            "Patch description": "URL or local path to patch"
-        }
-    }
-}
-```
-### How do I switch from packagist.drupal-composer.org to packages.drupal.org?
-
-Follow the instructions in the [documentation on drupal.org](https://www.drupal.org/docs/develop/using-composer/using-packagesdrupalorg).
-
-### How do I specify a PHP version ?
-
-Currently Drupal 8 supports PHP 5.5.9 as minimum version (see [Drupal 8 PHP requirements](https://www.drupal.org/docs/8/system-requirements/drupal-8-php-requirements)), however it's possible that a `composer update` will upgrade some package that will then require PHP 7+.
-
-To prevent this you can add this code to specify the PHP version you want to use in the `config` section of `composer.json`:
-```json
-"config": {
-    "sort-packages": true,
-    "platform": {"php": "5.5.9"}
-},
-```
 ## Additional Links
-* [Project Drupal Theme Guide](https://bitbucket.org/mediacurrent/drupal-project.git/src/HEAD/web/themes/custom/project_theme/README.md?fileviewer=file-view-default)
+* [Project Drupal Theme Guide](https://bitbucket.org/mediacurrent/fd_rain.git/src/HEAD/web/themes/custom/project_theme/README.md?fileviewer=file-view-default)
 * [Using Vagrant](https://bitbucket.org/mediacurrent/mis_vagrant/src/HEAD/README.md)
 * This repository created from [Composer template for Drupal projects](https://github.com/drupal-composer/drupal-project/blob/8.x/README.md) which has some addition information on usage.
 * [Using Composer](https://www.drupal.org/docs/develop/using-composer) with Drupal.
